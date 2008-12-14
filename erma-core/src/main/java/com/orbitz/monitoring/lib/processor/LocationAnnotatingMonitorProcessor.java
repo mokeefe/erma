@@ -17,7 +17,8 @@ public class LocationAnnotatingMonitorProcessor extends MonitorProcessorAdapter 
                 
         StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
         String attributeValue = null;
-        for (StackTraceElement stackTraceElement : stackTrace) {
+        for (int i = 0; i < stackTrace.length; i++) {
+            StackTraceElement stackTraceElement = stackTrace[i];
             String className = stackTraceElement.getClassName();
             if (className.startsWith("com.orbitz") && !className.startsWith("com.orbitz.monitoring")) {
                 attributeValue = stackTraceElement.toString();

@@ -9,10 +9,6 @@ import com.orbitz.monitoring.lib.factory.SimpleMonitorProcessorFactory;
 import com.orbitz.monitoring.test.MockMonitorProcessor;
 import junit.framework.TestCase;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
 /**
  * Unit tests for the AsyncMonitorProcessor.
  *
@@ -58,15 +54,16 @@ public class AsyncMonitorProcessorTest extends TestCase {
         _processor.monitorCreated(event);
         _processor.flushEvents();
         Monitor[] monitors = _attachedProcessor.extractMonitorCreatedObjects();
-        List<Monitor> monitorList =  Arrays.asList(monitors);
+
         boolean checkMonitorCreated = false;
-        for(Monitor monitor : monitors) {
+        for (int i = 0; i < monitors.length; i++) {
+            Monitor monitor = monitors[i];
             System.out.println(monitor.getAll());
             if (monitor.get(Monitor.NAME).equals(event.get(Monitor.NAME))) {
-              assertEquals(event.get(Monitor.CREATED_AT) , monitor.get(Monitor.CREATED_AT));
-              assertEquals(event.get(Monitor.THREAD_ID) , monitor.get(Monitor.THREAD_ID));
-              checkMonitorCreated = true;
-           }
+                assertEquals(event.get(Monitor.CREATED_AT), monitor.get(Monitor.CREATED_AT));
+                assertEquals(event.get(Monitor.THREAD_ID), monitor.get(Monitor.THREAD_ID));
+                checkMonitorCreated = true;
+            }
         }
        assertTrue(checkMonitorCreated);
     }
@@ -78,14 +75,15 @@ public class AsyncMonitorProcessorTest extends TestCase {
         _processor.flushEvents();
 
         Monitor[] monitors = _attachedProcessor.extractProcessObjects();
-        List<Monitor> monitorList =  Arrays.asList(monitors);
+
         boolean checkMonitorCreated = false;
-        for(Monitor monitor : monitors) {
+        for (int i = 0; i < monitors.length; i++) {
+            Monitor monitor = monitors[i];
             if (monitor.get(Monitor.NAME).equals(event.get(Monitor.NAME))) {
-              assertEquals(event.get(Monitor.CREATED_AT) , monitor.get(Monitor.CREATED_AT));
-              assertEquals(event.get(Monitor.THREAD_ID) , monitor.get(Monitor.THREAD_ID));
-              checkMonitorCreated = true;
-           }
+                assertEquals(event.get(Monitor.CREATED_AT), monitor.get(Monitor.CREATED_AT));
+                assertEquals(event.get(Monitor.THREAD_ID), monitor.get(Monitor.THREAD_ID));
+                checkMonitorCreated = true;
+            }
         }
        assertTrue(checkMonitorCreated);
     }

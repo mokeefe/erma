@@ -101,7 +101,7 @@ public class AttributeMapTest extends TestCase {
             PropertyUtilsBean utilBean = new PropertyUtilsBean();
             try {
                 utilBean.setProperty(nestedBean, "fo", "ba");
-                utilBean.setNestedProperty(nestedBean, "1", 0);
+                utilBean.setNestedProperty(nestedBean, "1", new Integer(0));
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -127,19 +127,22 @@ public class AttributeMapTest extends TestCase {
      */
     public void testSerializable() {
 
-        AttributeHolder holder = new AttributeHolder(1).serializable();
+        //RK: This test was trying to test "primitive" serialization, which doesn't exist.
+        //The test was simply relying on Autoboxing, so I went and did the manual boxing for 1.4
+
+        AttributeHolder holder = new AttributeHolder(new Integer(1)).serializable();
         assertTrue("Primitive is serializable by default", holder.isSerializable());
 
-        holder = new AttributeHolder(1.0).serializable();
+        holder = new AttributeHolder(new Double(1.0)).serializable();
         assertTrue("Primitive is serializable by default", holder.isSerializable());
 
-        holder = new AttributeHolder(1l).serializable();
+        holder = new AttributeHolder(new Long(1)).serializable();
         assertTrue("Primitive is serializable by default", holder.isSerializable());
 
-        holder = new AttributeHolder('x').serializable();
+        holder = new AttributeHolder(new Character('x')).serializable();
         assertTrue("Primitive is serializable by default", holder.isSerializable());
 
-        holder = new AttributeHolder(false).serializable();
+        holder = new AttributeHolder(Boolean.FALSE).serializable();
         assertTrue("Primitive is serializable by default", holder.isSerializable());
 
         holder = new AttributeHolder("foo").serializable();
