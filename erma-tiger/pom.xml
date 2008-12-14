@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.orbitz.erma</groupId>
         <artifactId>erma</artifactId>
-        <version>3.1-SNAPSHOT</version>
+        <version>3.2-SNAPSHOT</version>
     </parent>
 
     <artifactId>erma-tiger</artifactId>
